@@ -1,0 +1,31 @@
+{
+    "name": "M0uld K1ng BT Module 6",
+    "version": "0.0.1",
+    "description": "control Bluetooth M0uld K1ng Module 4.0",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*",
+        "BleAdvertisingManager": "github:j0ek3r/pxt-bleadvmanager"
+    },
+    "files": [
+        "README.md",
+        "enums.d.ts",
+        "shims.d.ts",
+        "main.ts",
+        "MK4.ts",
+        "mk_module_4_0.cpp",
+        "Module_4_0_Service.cpp",
+        "Module_4_0_Service.h"
+    ],
+    "public": true,
+    "targetVersions": {
+        "target": "7.0.57",
+        "pxt": "11.1.13"
+    },
+    "supportedTargets": [
+        "microbit"
+    ],
+    "disablesVariants": [
+        "mbdal"
+    ]
+}
