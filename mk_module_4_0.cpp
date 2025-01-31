@@ -10,7 +10,7 @@ using namespace pxt;
 /**
  * Support for M0uld K1ng Module 4.0.
  */
-namespace mk_module_4_0 
+namespace mk_Module_4_0 
 {
     Module_4_0_Service* _pService[3] = 
     {
@@ -20,6 +20,7 @@ namespace mk_module_4_0
     };
 
 
+    //%
     Module_4_0_Service* getService(uint8_t moduleNo) 
     {
         Module_4_0_Service *pService = _pService[moduleNo];
@@ -64,11 +65,11 @@ namespace mk_module_4_0
 
 
     //% 
-    void sendData(uint8_t moduleNo) 
+    void setData(uint8_t moduleNo) 
     {
         Module_4_0_Service *pService = getService(moduleNo);
 
-        pService->sendData();
+        pService->setData();
     }   
 
 
