@@ -38,14 +38,14 @@ class Module_4_0_Service : public IBLEAdvClient
     // handle from bleAdvManager returned on registration
     uint8_t m_bleAdvManager_handle;
     
-    float m_channelOffsets_pct[6] = {
-        0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+    float m_channelOffsets_pct[12] = {
+        0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 
-    float m_channelMaximums_pct[6] = {
-        100.0, 100.0, 100.0, 100.0, 100.0, 100.0 };
+    float m_channelMaximums_pct[12] = {
+        100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0 };
 
-    uint8_t m_channelValues_pct[6] = {
-        0x80, 0x80, 0x80, 0x80, 0x80, 0x80 };
+    uint8_t m_channelValues_pct[12] = {
+        0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80 };
 
     uint8_t m_pPayload[31] = {
         0x02, // length: 0x2 (2)
@@ -60,8 +60,8 @@ class Module_4_0_Service : public IBLEAdvClient
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
       };
       
-      uint8_t m_telegram_Data[10] = { 
-        0x61, 0x7B, 0xA7, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x9E };
+      uint8_t m_telegram_Data[8] = { 
+        0xAD, 0x7B, 0xA7, 0x80, 0x80, 0x80, 0x4F, 0x52 }; // connect
 };
 
 #endif // MODULE_4_0_SERVICE_H

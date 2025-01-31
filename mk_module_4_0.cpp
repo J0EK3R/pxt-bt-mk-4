@@ -12,35 +12,26 @@ using namespace pxt;
  */
 namespace mk_Module_4_0 
 {
-    Module_4_0_Service* _pService[3] = 
-    {
-        NULL,
-        NULL,
-        NULL
-    };
-
+    Module_4_0_Service* _pService = NULL;
 
     //%
-    Module_4_0_Service* getService(uint8_t moduleNo) 
+    Module_4_0_Service* getService() 
     {
-        Module_4_0_Service *pService = _pService[moduleNo];
-
-        if (NULL == pService)
+        if (NULL == _pService)
         {
             BLEAdvManager *p_BLEAdvManager = BLEAdvManager::getInstance();
 
-            pService = new Module_4_0_Service(*p_BLEAdvManager, moduleNo);
-            _pService[moduleNo] = pService;
+            _pService = new Module_4_0_Service(*p_BLEAdvManager, moduleNo);
         }
 
-        return pService;
+        return _pService;
     }
 
 
     //%
     void init(uint8_t moduleNo) 
     {
-        Module_4_0_Service *pService = getService(moduleNo);
+        Module_4_0_Service *pService = getService();
 
         pService->connect();
     }
@@ -49,25 +40,34 @@ namespace mk_Module_4_0
     //% 
     void setChannel(uint8_t moduleNo, uint8_t channel, float value) 
     {
-        Module_4_0_Service *pService = getService(moduleNo);
+        Module_4_0_Service *pService = getService();
 
-        pService->setChannel(channel, value);
+        pService->setChannel(moduleNo * 3 + channel, value);
     }   
 
 
     //% 
     void setChannelOffset(uint8_t moduleNo, uint8_t channel, float value) 
     {
-        Module_4_0_Service *pService = getService(moduleNo);
+        Module_4_0_Service *pService = getService();
 
-        pService->setChannelOffset(channel, value);
+        pService->setChannelOffset(moduleNo * 3 + channel, value);
+    }   
+
+
+    //% 
+    void setChannelMax(uint8_t moduleNo, uint8_t channel, float value) 
+    {
+        Module_4_0_Service *pService = getService();
+
+        pService->setChannelMax(moduleNo * 3 + channel, value);
     }   
 
 
     //% 
     void setData(uint8_t moduleNo) 
     {
-        Module_4_0_Service *pService = getService(moduleNo);
+        Module_4_0_Service *pService = getService();
 
         pService->setData();
     }   
@@ -76,7 +76,7 @@ namespace mk_Module_4_0
     //% 
     void stop(uint8_t moduleNo) 
     {
-        Module_4_0_Service *pService = getService(moduleNo);
+        Module_4_0_Service *pService = getService();
 
         if (NULL != pService) 
         {
@@ -88,7 +88,7 @@ namespace mk_Module_4_0
     //% 
     uint8_t getVersion(uint8_t moduleNo) 
     {
-        Module_4_0_Service *pService = getService(moduleNo);
+        Module_4_0_Service *pService = getService();
 
         return pService->getVersion();
     }   
