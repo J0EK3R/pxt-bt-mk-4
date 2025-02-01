@@ -7,7 +7,7 @@
 
 #define CHANNEL_COUNT 12                // number of channels
 #define SETVALUE_ARRAY_SIZE 6           // size of setvalue array
-#define IS_ZERO_HYSTERESIS_DEFAULT 1.0  // defualt value of iszeror hysteresis
+#define IS_ZERO_HYSTERESIS_DEFAULT 1.0  // default value of iszero hysteresis
 #define CHANNEL_OFFSET_DEFAULT 0.0      // default  of channel offset hysteresis
 #define CHANNEL_MAXIMUM_DEFAULT 100.0   // default of channel maximum value
 #define CHANNEL_ZERO_VALUE 0x88         // means stop
@@ -40,9 +40,6 @@ class Module_4_0_Service : public IBLEAdvClient
 
     // advertising manager
     BLEAdvManager &m_bleAdvManager;
-
-    // number of module [0..2]
-    uint8_t m_moduleNo;
     
     // handle from bleAdvManager returned on registration
     uint8_t m_bleAdvManager_handle;
