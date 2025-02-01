@@ -21,7 +21,7 @@ namespace mk_Module_4_0
         {
             BLEAdvManager *p_BLEAdvManager = BLEAdvManager::getInstance();
 
-            _pService = new Module_4_0_Service(*p_BLEAdvManager, moduleNo);
+            _pService = new Module_4_0_Service(*p_BLEAdvManager);
         }
 
         return _pService;

@@ -5,6 +5,13 @@
 #include "pxt.h"
 #include "BLEAdvManager.h"
 
+#define CHANNEL_COUNT 12                // number of channels
+#define SETVALUE_ARRAY_SIZE 6           // size of setvalue array
+#define IS_ZERO_HYSTERESIS_DEFAULT 1.0  // defualt value of iszeror hysteresis
+#define CHANNEL_OFFSET_DEFAULT 0.0      // default  of channel offset hysteresis
+#define CHANNEL_MAXIMUM_DEFAULT 100.0   // default of channel maximum value
+#define CHANNEL_ZERO_VALUE 0x88         // means stop
+
 class Module_4_0_Service : public IBLEAdvClient
 {
     public:
@@ -14,10 +21,12 @@ class Module_4_0_Service : public IBLEAdvClient
       * @param _BLEAdvManager The instance of a BLEAdvManager that we're running on.
       * @param moduleNo Number of the MK4 Module.
       */
-    Module_4_0_Service(BLEAdvManager &_BLEAdvManager, uint8_t moduleNo);
+    Module_4_0_Service(BLEAdvManager &_BLEAdvManager);
 
     void connect();
     void stop();
+
+    void reset();
 
     void setChannel(uint8_t channelNo, float value_pct);
     void setData();
@@ -38,14 +47,22 @@ class Module_4_0_Service : public IBLEAdvClient
     // handle from bleAdvManager returned on registration
     uint8_t m_bleAdvManager_handle;
     
-    float m_channelOffsets_pct[12] = {
-        0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
+    // left/right border in percent of a hysteresis taking a setvalue as zero
+    float m_isZero_hysteresis_pct = IS_ZERO_HYSTERESIS_DEFAULT;
 
-    float m_channelMaximums_pct[12] = {
-        100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0 };
+    // array of channel specific offsets in percent beeing added to a channels setvalue (to finetune)
+    float m_channelOffsets_pct[CHANNEL_COUNT] = {
+        CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT,
+        CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT };
 
-    uint8_t m_channelValues_pct[12] = {
-        0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80 };
+    // array of channel specific maximums in percent to limit a channels setvalue (to finetune)
+    float m_channelMaximums_pct[CHANNEL_COUNT] = {
+        CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, 
+        CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT };
+
+    // array of absolute (finetuned) setvalues to be sent - one nibble per channel
+    uint8_t m_channelValues_nibble[SETVALUE_ARRAY_SIZE] = {
+        CHANNEL_ZERO_VALUE, CHANNEL_ZERO_VALUE, CHANNEL_ZERO_VALUE, CHANNEL_ZERO_VALUE, CHANNEL_ZERO_VALUE, CHANNEL_ZERO_VALUE, };
 
     uint8_t m_pPayload[31] = {
         0x02, // length: 0x2 (2)
@@ -60,8 +77,8 @@ class Module_4_0_Service : public IBLEAdvClient
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
       };
       
-      uint8_t m_telegram_Data[8] = { 
-        0xAD, 0x7B, 0xA7, 0x80, 0x80, 0x80, 0x4F, 0x52 }; // connect
+      uint8_t m_telegram_Data[10] = { 
+        0x7D, 0x7B, 0xA7, 0x88, 0x88, 0x88, 0x88, 0x88, 0x88, 0x82 }; // connect
 };
 
 #endif // MODULE_4_0_SERVICE_H
