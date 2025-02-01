@@ -5,7 +5,7 @@
     "license": "MIT",
     "dependencies": {
         "core": "*",
-        "BleAdvertisingManager": "github:j0ek3r/pxt-bleadvmanager#v0.1.0"
+        "BleAdvertisingManager": "github:j0ek3r/pxt-bleadvmanager#v1.0.0"
     },
     "files": [
         "README.md",
