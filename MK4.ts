@@ -2,7 +2,7 @@
  * Support for M0uld K1ng Module 4.0.
  */
 
-export enum MK4Module
+enum MK4Module
 {
      //% block="MK4 1" enumval=0
      M1 = 0,
@@ -13,7 +13,7 @@ export enum MK4Module
 }
 
 
-export enum MK4Channel
+enum MK4Channel
 {
     //% block="Channel A" enumval=0
     A = 0,
@@ -24,7 +24,6 @@ export enum MK4Channel
     //% block="Channel D" enumval=3
     D = 3,
 }
-
 
 //% color=#000c30 weight=100 icon="\uf294" block="MK Module 6.0"
 namespace MK4
