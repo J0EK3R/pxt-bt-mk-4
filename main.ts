@@ -1,5 +1,3 @@
-/// <reference no-default-lib="true"/>
-
 /**
  * Support for M0uld K1ng Module 4.0.
  */
