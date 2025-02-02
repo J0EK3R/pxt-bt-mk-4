@@ -4,7 +4,7 @@
 //% color=#00c300 weight=100 icon="\uf294" block="MK Module 4.0"
 namespace MK4
 {
-    enum Module
+    export enum Module
     {
          //% block="MK4 1" enumval=0
          M1 = 0,
@@ -15,7 +15,7 @@ namespace MK4
     }
     
     
-    enum Channel
+    export enum Channel
     {
         //% block="Channel A" enumval=0
         A = 0,
