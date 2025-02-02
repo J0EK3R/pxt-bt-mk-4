@@ -5,12 +5,12 @@
 #include "pxt.h"
 #include "BLEAdvManager.h"
 
-#define CHANNEL_COUNT 12                // number of channels
-#define SETVALUE_ARRAY_SIZE 6           // size of setvalue array
-#define IS_ZERO_HYSTERESIS_DEFAULT 1.0  // default value of iszero hysteresis
-#define CHANNEL_OFFSET_DEFAULT 0.0      // default  of channel offset hysteresis
-#define CHANNEL_MAXIMUM_DEFAULT 100.0   // default of channel maximum value
-#define CHANNEL_ZERO_VALUE 0x88         // means stop
+#define MK4_CHANNEL_COUNT 12                // number of channels
+#define MK4_SETVALUE_ARRAY_SIZE 6           // size of setvalue array
+#define MK4_IS_ZERO_HYSTERESIS_DEFAULT 1.0  // default value of iszero hysteresis
+#define MK4_CHANNEL_OFFSET_DEFAULT 0.0      // default  of channel offset hysteresis
+#define MK4_CHANNEL_MAXIMUM_DEFAULT 100.0   // default of channel maximum value
+#define MK4_CHANNEL_ZERO_VALUE 0x88         // means stop
 
 class Module_4_0_Service : public IBLEAdvClient
 {
@@ -45,21 +45,21 @@ class Module_4_0_Service : public IBLEAdvClient
     uint8_t m_bleAdvManager_handle;
     
     // left/right border in percent of a hysteresis taking a setvalue as zero
-    float m_isZero_hysteresis_pct = IS_ZERO_HYSTERESIS_DEFAULT;
+    float m_isZero_hysteresis_pct = MK4_IS_ZERO_HYSTERESIS_DEFAULT;
 
     // array of channel specific offsets in percent beeing added to a channels setvalue (to finetune)
-    float m_channelOffsets_pct[CHANNEL_COUNT] = {
-        CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT,
-        CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT, CHANNEL_OFFSET_DEFAULT };
+    float m_channelOffsets_pct[MK4_CHANNEL_COUNT] = {
+        MK4_CHANNEL_OFFSET_DEFAULT, MK4_CHANNEL_OFFSET_DEFAULT, MK4_CHANNEL_OFFSET_DEFAULT, MK4_CHANNEL_OFFSET_DEFAULT, MK4_CHANNEL_OFFSET_DEFAULT, MK4_CHANNEL_OFFSET_DEFAULT,
+        MK4_CHANNEL_OFFSET_DEFAULT, MK4_CHANNEL_OFFSET_DEFAULT, MK4_CHANNEL_OFFSET_DEFAULT, MK4_CHANNEL_OFFSET_DEFAULT, MK4_CHANNEL_OFFSET_DEFAULT, MK4_CHANNEL_OFFSET_DEFAULT };
 
     // array of channel specific maximums in percent to limit a channels setvalue (to finetune)
-    float m_channelMaximums_pct[CHANNEL_COUNT] = {
-        CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, 
-        CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT, CHANNEL_MAXIMUM_DEFAULT };
+    float m_channelMaximums_pct[MK4_CHANNEL_COUNT] = {
+        MK4_CHANNEL_MAXIMUM_DEFAULT, MK4_CHANNEL_MAXIMUM_DEFAULT, MK4_CHANNEL_MAXIMUM_DEFAULT, MK4_CHANNEL_MAXIMUM_DEFAULT, MK4_CHANNEL_MAXIMUM_DEFAULT, MK4_CHANNEL_MAXIMUM_DEFAULT, 
+        MK4_CHANNEL_MAXIMUM_DEFAULT, MK4_CHANNEL_MAXIMUM_DEFAULT, MK4_CHANNEL_MAXIMUM_DEFAULT, MK4_CHANNEL_MAXIMUM_DEFAULT, MK4_CHANNEL_MAXIMUM_DEFAULT, MK4_CHANNEL_MAXIMUM_DEFAULT };
 
     // array of absolute (finetuned) setvalues to be sent - one nibble per channel
-    uint8_t m_channelValues_nibble[SETVALUE_ARRAY_SIZE] = {
-        CHANNEL_ZERO_VALUE, CHANNEL_ZERO_VALUE, CHANNEL_ZERO_VALUE, CHANNEL_ZERO_VALUE, CHANNEL_ZERO_VALUE, CHANNEL_ZERO_VALUE, };
+    uint8_t m_channelValues_nibble[MK4_SETVALUE_ARRAY_SIZE] = {
+        MK4_CHANNEL_ZERO_VALUE, MK4_CHANNEL_ZERO_VALUE, MK4_CHANNEL_ZERO_VALUE, MK4_CHANNEL_ZERO_VALUE, MK4_CHANNEL_ZERO_VALUE, MK4_CHANNEL_ZERO_VALUE, };
 
     uint8_t m_pPayload[31] = {
         0x02, // length: 0x2 (2)

@@ -37,7 +37,7 @@ namespace MK4
      * @param module module, eg: "Module.M1"
      */
     //% blockId=mk4_init
-    //% block="$module: init"
+    //% block="$module init"
     //% group="M0uld K1ng Module 4.0"
     //% shim=mk_module_4_0::init
     //% blockGap=8 weight=60
@@ -54,7 +54,7 @@ namespace MK4
      * @param value [-100..100], eg: "0"
      */
     //% blockId=mk4_setchannel 
-    //% block="$module: set value $channel to $value"
+    //% block="$module set value $channel to $value"
     //% group="M0uld K1ng Module 4.0"
     //% value.min=-100 value.max=100 value.defl=0
     //% shim=mk_module_4_0::setChannel
@@ -70,7 +70,7 @@ namespace MK4
      * @param module module, eg: "Module.M1"
      */
     //% blockId=mk4_setdata 
-    //% block="$module: take over data to send"
+    //% block="$module take over data to send"
     //% group="M0uld K1ng Module 4.0"
     //% shim=mk_module_4_0::setData
     //% blockGap=8 weight=60
@@ -85,7 +85,7 @@ namespace MK4
      * @param module module, eg: "Module.M1"
      */
     //% blockId=mk4_stop
-    //% block="$module: stop"
+    //% block="$module stop"
     //% group="M0uld K1ng Module 4.0"
     //% shim=mk_module_4_0::stop
     //% weight=10 blockGap=8
@@ -102,7 +102,7 @@ namespace MK4
      * @param offset [0..100], eg: "0"
      */
     //% blockId=mk4_setchanneloffset
-    //% block="$module: set offset $channel to $offset"
+    //% block="$module set offset $channel to $offset"
     //% group="M0uld K1ng Module 4.0 - finetune"
     //% offset.min=0 offset.max=100 offset.defl=0
     //% shim=mk_module_4_0::setChannelOffset
@@ -120,7 +120,7 @@ namespace MK4
      * @param maximum [0..100], eg: "100"
      */
     //% blockId=mk4_setchannelmax
-    //% block="$module: set maximum $channel to $maximum"
+    //% block="$module set maximum $channel to $maximum"
     //% group="M0uld K1ng Module 4.0 - finetune"
     //% maximum.min=0 maximum.max=100 maximum.defl=100
     //% shim=mk_module_4_0::setChannelMax
@@ -136,7 +136,7 @@ namespace MK4
      * @param module module, eg: "Module.M1"
      */
     //% blockId=mk4_getversion 
-    //% block="$module: get Version"
+    //% block="$module get Version"
     //% group="M0uld K1ng Module 4.0"
     //% shim=mk_module_4_0::getVersion
     //% blockGap=8 weight=60 

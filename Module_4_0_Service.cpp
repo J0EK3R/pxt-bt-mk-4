@@ -19,17 +19,17 @@ Module_4_0_Service::Module_4_0_Service(BLEAdvManager &_BLEAdvManager) :
 
 void Module_4_0_Service::reset() 
 {
-    m_isZero_hysteresis_pct = IS_ZERO_HYSTERESIS_DEFAULT;
+    m_isZero_hysteresis_pct = MK4_IS_ZERO_HYSTERESIS_DEFAULT;
 
-    for(uint8_t index = 0; index < CHANNEL_COUNT; index++)
+    for(uint8_t index = 0; index < MK4_CHANNEL_COUNT; index++)
     {
-        m_channelOffsets_pct[index] = CHANNEL_OFFSET_DEFAULT;
-        m_channelMaximums_pct[index] = CHANNEL_MAXIMUM_DEFAULT;
+        m_channelOffsets_pct[index] = MK4_CHANNEL_OFFSET_DEFAULT;
+        m_channelMaximums_pct[index] = MK4_CHANNEL_MAXIMUM_DEFAULT;
     }
 
-    for(uint8_t index = 0; index < SETVALUE_ARRAY_SIZE; index++)
+    for(uint8_t index = 0; index < MK4_SETVALUE_ARRAY_SIZE; index++)
     {
-        m_channelValues_nibble[index] = CHANNEL_ZERO_VALUE;
+        m_channelValues_nibble[index] = MK4_CHANNEL_ZERO_VALUE;
     }
 }
 
@@ -71,7 +71,7 @@ void Module_4_0_Service::setChannel(uint8_t channelNo, float value_pct)
     // MICROBIT_DEBUG_DMESG("Module_4_0_Service::setChannel");
 
      // check 
-    if (channelNo >= CHANNEL_COUNT)
+    if (channelNo >= MK4_CHANNEL_COUNT)
     {
         return;
     }
@@ -117,7 +117,7 @@ void Module_4_0_Service::setChannel(uint8_t channelNo, float value_pct)
 void Module_4_0_Service::setChannelOffset(uint8_t channelNo, float offset_pct) 
 {
      // check 
-    if (channelNo >= CHANNEL_COUNT)
+    if (channelNo >= MK4_CHANNEL_COUNT)
     {
         return;
     }
@@ -134,7 +134,7 @@ void Module_4_0_Service::setChannelOffset(uint8_t channelNo, float offset_pct)
 void Module_4_0_Service::setChannelMax(uint8_t channelNo, float maximum_pct) 
 {
      // check 
-    if (channelNo >= CHANNEL_COUNT)
+    if (channelNo >= MK4_CHANNEL_COUNT)
     {
         return;
     }
