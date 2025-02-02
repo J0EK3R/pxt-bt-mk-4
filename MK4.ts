@@ -1,9 +1,7 @@
 /**
  * Support for M0uld K1ng Module 4.0.
  */
-//% block="MK Module 4.0"
-//% icon="\uf294"
-//% color=#000c30 weight=100
+//% color=#000c30 weight=100 icon="\uf294" block="MK Module 6.0"
 namespace MK4
 {
     export enum Module
