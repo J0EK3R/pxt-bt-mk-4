@@ -25,7 +25,7 @@ enum MK4Channel
     D = 3,
 }
 
-//% color=#000c30 weight=100 icon="\uf294" block="MK Module 6.0"
+//% color=#00c300 weight=100 icon="\uf294" block="MK Module 4.0"
 namespace MK4
 {
     /**
