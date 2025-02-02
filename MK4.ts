@@ -1,7 +1,3 @@
-/**
- * Support for M0uld K1ng Module 4.0.
- */
-
 enum MK4Module
 {
      //% block="MK4 1" enumval=0
@@ -25,6 +21,9 @@ enum MK4Channel
     D = 3,
 }
 
+/**
+ * Support for M0uld K1ng Module 4.0.
+ */
 //% color=#00c300 weight=100 icon="\uf294" block="MK Module 4.0"
 namespace MK4
 {
