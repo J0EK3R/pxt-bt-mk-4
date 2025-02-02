@@ -1,32 +1,32 @@
-enum MK4Module
-{
-     //% block="MK4 1" enumval=0
-     M1 = 0,
-     //% block="MK4 2" enumval=1
-     M2 = 1,
-     //% block="MK4 3" enumval=2
-     M3 = 2,
-}
-
-
-enum MK4Channel
-{
-    //% block="Channel A" enumval=0
-    A = 0,
-    //% block="Channel B" enumval=1
-    B = 1,
-    //% block="Channel C" enumval=2
-    C = 2,
-    //% block="Channel D" enumval=3
-    D = 3,
-}
-
 /**
  * Support for M0uld K1ng Module 4.0.
  */
 //% color=#00c300 weight=100 icon="\uf294" block="MK Module 4.0"
 namespace MK4
 {
+    enum Module
+    {
+         //% block="MK4 1" enumval=0
+         M1 = 0,
+         //% block="MK4 2" enumval=1
+         M2 = 1,
+         //% block="MK4 3" enumval=2
+         M3 = 2,
+    }
+    
+    
+    enum Channel
+    {
+        //% block="Channel A" enumval=0
+        A = 0,
+        //% block="Channel B" enumval=1
+        B = 1,
+        //% block="Channel C" enumval=2
+        C = 2,
+        //% block="Channel D" enumval=3
+        D = 3,
+    }
+    
     /**
      *  initialisation of the module
      * @param module module, eg: "Module.M1"
@@ -36,7 +36,7 @@ namespace MK4
     //% group="M0uld K1ng Module 4.0"
     //% shim=mk_module_4_0::init
     //% blockGap=8 weight=60
-    export function init(module: MK4Module): void
+    export function init(module: Module): void
     {
         return;
     }
@@ -54,7 +54,7 @@ namespace MK4
     //% value.min=-100 value.max=100 value.defl=0
     //% shim=mk_module_4_0::setChannel
     //% blockGap=8 weight=60
-    export function setChannel(module: MK4Module, channel: MK4Channel, value: number): void
+    export function setChannel(module: Module, channel: Channel, value: number): void
     {
         return;
     }
@@ -69,7 +69,7 @@ namespace MK4
     //% group="M0uld K1ng Module 4.0"
     //% shim=mk_module_4_0::setData
     //% blockGap=8 weight=60
-    export function setData(module: MK4Module): void
+    export function setData(module: Module): void
     {
         return;
     }
@@ -84,7 +84,7 @@ namespace MK4
     //% group="M0uld K1ng Module 4.0"
     //% shim=mk_module_4_0::stop
     //% weight=10 blockGap=8
-    export function stop(module: MK4Module): void
+    export function stop(module: Module): void
     {
         return;
     };
@@ -102,7 +102,7 @@ namespace MK4
     //% offset.min=0 offset.max=100 offset.defl=0
     //% shim=mk_module_4_0::setChannelOffset
     //% blockGap=8 weight=60
-    export function setChannelOffset(module: MK4Module, channel: MK4Channel, offset: number): void
+    export function setChannelOffset(module: Module, channel: Channel, offset: number): void
     {
         return;
     }
@@ -120,7 +120,7 @@ namespace MK4
     //% maximum.min=0 maximum.max=100 maximum.defl=100
     //% shim=mk_module_4_0::setChannelMax
     //% blockGap=8 weight=60
-    export function setChannelMax(module: MK4Module, channel: MK4Channel, maximum: number = 100): void
+    export function setChannelMax(module: Module, channel: Channel, maximum: number = 100): void
     {
         return;
     }
@@ -136,7 +136,7 @@ namespace MK4
     //% shim=mk_module_4_0::getVersion
     //% blockGap=8 weight=60 
     //% advanced=true
-    export function getVersion(module: MK4Module): number
+    export function getVersion(module: Module): number
     {
         return 0;
     }
