@@ -23,8 +23,8 @@ void Module_4_0_Service::reset()
 
     for(uint8_t index = 0; index < MK4_CHANNEL_COUNT; index++)
     {
-        m_channelOffsets_pct[index] = MK4_CHANNEL_OFFSET_DEFAULT;
-        m_channelMaximums_pct[index] = MK4_CHANNEL_MAXIMUM_DEFAULT;
+        m_channelOffsets_abs_pct[index] = MK4_CHANNEL_OFFSET_DEFAULT;
+        m_channelMaximums_abs_pct[index] = MK4_CHANNEL_MAXIMUM_DEFAULT;
     }
 
     for(uint8_t index = 0; index < MK4_SETVALUE_ARRAY_SIZE; index++)
@@ -88,15 +88,15 @@ void Module_4_0_Service::setChannel(uint8_t channelNo, float value_pct)
     }
     else if (value_pct < 0) 
     {
-        float result_abs_pct = fmin(100, -fmax(value_pct - m_channelOffsets_pct[channelNo], -m_channelMaximums_pct[channelNo]));
-        float result = result_abs_pct * 0x07 / 100;
+        float result_abs_pct = fmin(-value_pct + m_channelOffsets_abs_pct[channelNo], m_channelMaximums_abs_pct[channelNo]);
+        float result = fmin(0x07, result_abs_pct * 0x07 / 100);
 
         setValue_nibble = 0x0F & (uint8_t)result;
     }
     else 
     {
-        float result_abs_pct = fmax(0, fmin(value_pct + m_channelOffsets_pct[channelNo], m_channelMaximums_pct[channelNo]));
-        float result = result_abs_pct * 0x07 / 100;
+        float result_abs_pct = fmin(value_pct + m_channelOffsets_abs_pct[channelNo], m_channelMaximums_abs_pct[channelNo]);
+        float result = fmin(0x07, result_abs_pct * 0x07 / 100);
 
         setValue_nibble = 0x0F & (uint8_t)(result + 0x08);
     }
@@ -107,7 +107,7 @@ void Module_4_0_Service::setChannel(uint8_t channelNo, float value_pct)
     }
     else
     {
-        originValue_byte = (originValue_byte & 0x0F) + (setValue_nibble << 8);
+        originValue_byte = (originValue_byte & 0x0F) + (setValue_nibble << 4);
     }
 
     m_channelValues_nibble[channelOffset] = originValue_byte;
@@ -122,7 +122,7 @@ void Module_4_0_Service::setChannelOffset(uint8_t channelNo, float offset_pct)
         return;
     }
 
-    m_channelOffsets_pct[channelNo] = offset_pct;
+    m_channelOffsets_abs_pct[channelNo] = offset_pct;
 }
 
 
@@ -139,7 +139,7 @@ void Module_4_0_Service::setChannelMax(uint8_t channelNo, float maximum_pct)
         return;
     }
 
-    m_channelMaximums_pct[channelNo] = maximum_pct;
+    m_channelMaximums_abs_pct[channelNo] = maximum_pct;
 }
 
 
