@@ -76,7 +76,7 @@ void Module_4_0_Service::setChannel(uint8_t channelNo, float value_pct)
         return;
     }
    
-    bool isHighNibble = (channelNo & 0x01) == 0x01; // is odd
+    bool isOdd = (channelNo & 0x01) == 0x01; // is odd
     uint8_t channelOffset = channelNo >> 1;         // div 2
     uint8_t originValue_byte = m_channelValues_nibble[channelOffset];
     uint8_t setValue_nibble = 0x00;
@@ -88,26 +88,26 @@ void Module_4_0_Service::setChannel(uint8_t channelNo, float value_pct)
     }
     else if (value_pct < 0) 
     {
-        float result_pct = fmax(value_pct - m_channelOffsets_pct[channelNo], -m_channelMaximums_pct[channelNo]);
-        float result = result_pct * 0x08 / 100;
+        float result_abs_pct = fmin(100, -fmax(value_pct - m_channelOffsets_pct[channelNo], -m_channelMaximums_pct[channelNo]));
+        float result = result_abs_pct * 0x07 / 100;
 
-        setValue_nibble = 0x01; // 0x0F & (uint8_t)fmax(result + 0x08, 0);
+        setValue_nibble = 0x0F & result;
     }
     else 
     {
-        float result_pct = fmin(value_pct + m_channelOffsets_pct[channelNo], m_channelMaximums_pct[channelNo]);
-        float result = result_pct * 0x80 / 100;
+        float result_abs_pct = fmax(0, fmin(value_pct + m_channelOffsets_pct[channelNo], m_channelMaximums_pct[channelNo]));
+        float result = result_abs_pct * 0x07 / 100;
 
-        setValue_nibble = 0x0F; // 0x0F & (uint8_t)fmin(result + 0x08, 0x0F);
+        setValue_nibble = 0x0F & (result + 0x08);
     }
 
-    if (isHighNibble)
+    if (isOdd)
     {
-        originValue_byte = (originValue_byte & 0x0F) + (setValue_nibble << 8);
+        originValue_byte = (originValue_byte & 0xF0) + setValue_nibble;
     }
     else
     {
-        originValue_byte = (originValue_byte & 0xF0) + setValue_nibble;
+        originValue_byte = (originValue_byte & 0x0F) + (setValue_nibble << 8);
     }
 
     m_channelValues_nibble[channelOffset] = originValue_byte;
