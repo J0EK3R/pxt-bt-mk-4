@@ -91,14 +91,14 @@ void Module_4_0_Service::setChannel(uint8_t channelNo, float value_pct)
         float result_pct = fmax(value_pct - m_channelOffsets_pct[channelNo], -m_channelMaximums_pct[channelNo]);
         float result = result_pct * 0x08 / 100;
 
-        setValue_nibble =  0x0F & (uint8_t)fmax(result + 0x08, 0);
+        setValue_nibble = 0x00; // 0x0F & (uint8_t)fmax(result + 0x08, 0);
     }
     else 
     {
         float result_pct = fmin(value_pct + m_channelOffsets_pct[channelNo], m_channelMaximums_pct[channelNo]);
         float result = result_pct * 0x80 / 100;
 
-        setValue_nibble = 0x0F & (uint8_t)fmin(result + 0x08, 0x0F);
+        setValue_nibble = 0x0F; // 0x0F & (uint8_t)fmin(result + 0x08, 0x0F);
     }
 
     if (isHighNibble)
